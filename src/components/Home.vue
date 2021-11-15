@@ -11,7 +11,8 @@
             <v-text-field
               prepend-icon="mdi-database-search"
               @keydown.enter.prevent="searchTicker"
-              label="Search Here"
+              label="Search Here "
+              append-icon="mdi-magnify"
               v-model="searchValue"
             ></v-text-field>
           </v-form>
@@ -58,12 +59,9 @@
         </v-expansion-panels>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="indigo darken-1" @click="searchTicker">
-            Search
-            <v-icon right color="white"> mdi-magnify </v-icon>
-          </v-btn>
           <v-btn
             :disabled="!searchValue"
+            class="mr-2 px-4"
             color="indigo darken-1"
             @click="searchValue = ''"
           >
