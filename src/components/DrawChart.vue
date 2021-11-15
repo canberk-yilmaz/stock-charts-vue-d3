@@ -211,8 +211,6 @@ export default {
 
       //volume
       g.append("line")
-        // .attr("y1", (i) => yScale(Yo[i]))
-
         .attr("y1", (i) => height - yVolScale(Yvol[i]))
         .attr("stroke-width", xScale.bandwidth())
         .attr("stroke", (i) => colors[1 + Math.sign(Yo[i] - Yc[i])])
@@ -227,8 +225,6 @@ export default {
         .attr("stroke", (i) => colors[1 + Math.sign(Yo[i] - Yc[i])]);
 
       if (title) g.append("title").text(title);
-
-      /* Volume series bars */
     },
   },
   created() {

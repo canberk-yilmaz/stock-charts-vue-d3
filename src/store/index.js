@@ -6,8 +6,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    title: "patika",
-    number: 0,
     apiURL: "https://www.alphavantage.co/query",
     apikey: process.env.VUE_APP_API_KEY,
     stockDataSeries: {},
@@ -49,7 +47,6 @@ export default new Vuex.Store({
 
       axios
         .get(`${state.apiURL}`, {
-          // headers: { ...state.headers },
           params: {
             function: "SYMBOL_SEARCH",
             keywords: payload,
@@ -131,8 +128,7 @@ export default new Vuex.Store({
     },
     getUserStatus(state) {
       //if Admin true, else false
-      return state.userStatus === "Admin"
-    }
+      return state.userStatus === "Admin";
+    },
   },
-  modules: {},
 });
