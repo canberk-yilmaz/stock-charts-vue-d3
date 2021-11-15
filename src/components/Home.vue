@@ -74,39 +74,46 @@
       </v-card>
       <v-row justify="center" align="center">
         <v-col d-flex justify-center>
-          <h3
-            v-show="
-              this.$store.state.selectedTicker && this.formattedTimeSeries
-            "
-            class="
-              indigo
-              lighten-2
-              mt-4
-              pa-2
-              grey--text
-              text--lighten-4 text-center
-              stock-info
-            "
-          >
-            Selected Ticker: {{ this.$store.state.selectedTicker.toUpperCase() }}
-          </h3>
+          <transition name="fade" appear>
+            <h3
+              key="a1"
+              v-show="
+                this.$store.state.selectedTicker && this.formattedTimeSeries
+              "
+              class="
+                indigo
+                lighten-2
+                mt-4
+                pa-2
+                grey--text
+                text--lighten-4 text-center
+                stock-info
+              "
+            >
+              Selected Ticker:
+              {{ this.$store.state.selectedTicker.toUpperCase() }}
+            </h3>
+          </transition>
 
-          <h3
-            v-show="
-              this.$store.state.selectedTicker && this.formattedTimeSeries
-            "
-            class="
-              indigo
-              lighten-2
-              mt-1
-              pa-2
-              grey--text
-              text--lighten-4 text-center
-              stock-info
-            "
-          >
-            Selected Frequency: {{ this.$store.state.selectedTimeSeries }}
-          </h3>
+          <transition name="fade" appear>
+            <h3
+              key="a2"
+              v-show="
+                this.$store.state.selectedTicker && this.formattedTimeSeries
+              "
+              class="
+                indigo
+                lighten-2
+                mt-1
+                pa-2
+                grey--text
+                text--lighten-4 text-center
+                stock-info
+              "
+            >
+              Selected Frequency: {{ this.$store.state.selectedTimeSeries }}
+            </h3>
+          </transition>
         </v-col>
       </v-row>
       <!-- <template>
@@ -117,24 +124,27 @@
         </v-tabs>
       </template>-->
       <template>
-        <v-tabs
-          v-show="this.$store.state.selectedTicker && this.formattedTimeSeries"
-          centered
-          color="indigo lighten-2"
-          show-arrows
-          class="pa-4"
-        >
-          <v-tab
-            v-for="item in items"
-            :key="item"
-            @click="
-              setTimeSeries(item);
-              setStockSeries();
+        <transition name="fade" appear>
+          <v-tabs
+            v-show="
+              this.$store.state.selectedTicker && this.formattedTimeSeries
             "
-            >{{ item }}</v-tab
+            centered
+            color="indigo lighten-2"
+            show-arrows
+            class="pa-4"
           >
-        </v-tabs>
-        <v-divider></v-divider>
+            <v-tab
+              v-for="item in items"
+              :key="item"
+              @click="
+                setTimeSeries(item);
+                setStockSeries();
+              "
+              >{{ item }}</v-tab
+            >
+          </v-tabs>
+        </transition>
       </template>
 
       <!-- <div>
@@ -162,6 +172,7 @@ export default {
     selectedTimeSeries: "DAILY",
     panels: [],
     items: ["DAILY", "WEEKLY", "MONTHLY"],
+    visible: false,
   }),
 
   computed: {
@@ -230,9 +241,14 @@ export default {
 </script>
 
 <style scoped>
-
 .stock-info {
   border-radius: 0.5rem;
 }
-
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>
